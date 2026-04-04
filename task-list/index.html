@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <titlte>Task List</title>
+    </head>
+
+    <body>
+<h1>We're building a task list</h1>
+<input type="text" id="newTask" placeholder="Enter a new task">
+<button id="addTask">Add Task</button>
+
+        <h2>Task List</h2>
+        <ul id="taskList">
+            <li>Task 1: Buy groceries</li>
+            <li>Task 2: Finish project report</li>
+            <li>Task 3: Call the bank</li>
+        </ul>
+
+        <script>
+            //when this button is clicked ...
+            var taskButton = document.querySelector("#addTask");
+
+            //take the info from this input...
+            var taskInput = document.querySelector("#newTask");
+
+            //and put in an LI in here...
+            var taskList = document.querySelector("#taskList");
+
+            taskButton.addEventListener("click", function() {
+                addTask(taskInput.value);
+            });
+
+            function addTask(newTask) {
+                console.log("were adding blah blah")
+
+                var html = "<li>" + newTask + "</li>";
+
+                taskList.innerHTML += html;
+            }
+
+            var shoppingList = ["milk", "eggs", "bread"];
+
+            console.log(shoppingList); 
+
+            console.log(shoppingList[0]); //milk
+
+            shoppingList[shoppingList.length-1] = "butter";
+
+            console.log(shoppingList);
+
+            shoppingList.push("cheese");
+            shoppingList.push("ham");
+
+            for(let i = 0; i < shoppingList.length; i++) {
+                console.log(shoppingList[i]);
+            }
+
+            //arrays used for storing data 
+            //store our list of tasks in an array instead of the DOM
+        </script>
+
+</html>

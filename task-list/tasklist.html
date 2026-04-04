@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fancy Task List</title>
+    </head>
+
+    <body>
+        <h1>our fancy task list</h1>
+
+        <input type="text" id="newTask" placeholder="Enter a new task">
+        <button id="addTask">Add Task</button>
+
+        <ul id="taskList">
+            
+        </ul>
+
+        <script>
+            var taskList = [];
+
+            var taskButton = document.querySelector("#addTask");
+            var taskInput = document.querySelector("#newTask");
+
+           // taskList.push("brush teeth");
+           // taskList.push("go to class");
+
+            function addTask(task) {
+                if (task.trim() === "") {
+        return; // stop if empty
+    }
+//if task text ! = "" then run the rest of the code
+
+                taskList.push(task);
+                
+            }
+
+            function renderList(){
+                var listElement = document.querySelector("#taskList");
+                listElement.innerHTML = "";
+                //read task lift array and properly render it to the page
+                for (var i=0;i<taskList.length;i++){
+                    var listItem = "<li>" + taskList[i] + "</li>";
+
+                    listElement.innerHTML += listItem;
+                }
+            }
+
+            
+
+            taskButton.addEventListener("click", function() {
+                var taskText = taskInput.value;
+                addTask(taskText);
+
+                renderList();
+            })
+
+            addTask("go to lunch");
+            addTask("go to the gym");
+
+
+        </script>
+        </body>
+</html>
