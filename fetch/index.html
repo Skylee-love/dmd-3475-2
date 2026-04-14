@@ -1,0 +1,36 @@
+<html>
+    <body>
+        <script>
+
+            function renderList(){
+
+            }
+            
+            function getCatFacts(count) {
+                fetch(`https://catfact.ninja/facts?limit=${count}`)
+                    .then(response => response.json())
+                    .then(function(data) {
+                        catFacts = data.data;
+                        renderList();
+                    });
+            }
+
+            getCatFacts(1);
+
+                function getDogBreeds() {
+                    fetch('https://dogapi.dog/api/v2/breeds?page[size]=10')
+                        .then(response => response.json())
+                        .then(function(data) {
+                            var dogBreeds = data.data;
+
+                            console.log(dogBreeds[0].attributes.name);
+                            console.log(dogBreeds[0].attributes.description);
+                            console.log(dogBreeds[0].attributes.female_weight.max);
+                            
+                        });
+                }
+
+                getDogBreeds();
+        </script>
+    </body>
+</html>
