@@ -1,36 +1,72 @@
+<!DOCTYPE html>
 <html>
-    <body>
-        <script>
-
-            function renderList(){
-
+    <head>
+        <title>Dog Breed Browser</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
             }
-            
-            function getCatFacts(count) {
-                fetch(`https://catfact.ninja/facts?limit=${count}`)
+            h1 {
+                color: #333;
+            }
+            .breed-list {
+                list-style-type: none;
+                padding: 0;
+            }
+            .breed-list li {
+                padding: 10px;
+                margin: 5px 0;
+                background-color: #f0f0f0;
+                border-radius: 5px;
+            }
+            .breed-list a {
+                color: #007bff;
+                text-decoration: none;
+                font-weight: bold;
+            }
+            .breed-list a:hover {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Dog Breed Browser</h1>
+        <p>Click on a breed to learn more!</p>
+        <ul id="breeds-list" class="breed-list"></ul>
+
+        <script>
+            function renderBreedsList(breeds) {
+                const list = document.getElementById('breeds-list');
+                list.innerHTML = ''; // Clear existing items
+                
+                breeds.forEach(breed => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    
+                    link.textContent = breed.attributes.name;
+                    link.href = `profile.html?id=${breed.id}`;
+                    
+                    listItem.appendChild(link);
+                    list.appendChild(listItem);
+                });
+            }
+
+            function getDogBreeds() {
+                fetch('https://dogapi.dog/api/v2/breeds')
                     .then(response => response.json())
                     .then(function(data) {
-                        catFacts = data.data;
-                        renderList();
-                    });
+                        const dogBreeds = data.data;
+                        console.log('Breeds loaded:', dogBreeds);
+                        renderBreedsList(dogBreeds);
+                    })
+                    .catch(error => console.error('Error fetching breeds:', error));
             }
 
-            getCatFacts(1);
-
-                function getDogBreeds() {
-                    fetch('https://dogapi.dog/api/v2/breeds?page[size]=10')
-                        .then(response => response.json())
-                        .then(function(data) {
-                            var dogBreeds = data.data;
-
-                            console.log(dogBreeds[0].attributes.name);
-                            console.log(dogBreeds[0].attributes.description);
-                            console.log(dogBreeds[0].attributes.female_weight.max);
-                            
-                        });
-                }
-
-                getDogBreeds();
+            // Load breeds when page loads
+            getDogBreeds();
         </script>
     </body>
 </html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dog Breed Profile</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            h1 {
+                color: #333;
+            }
+            .back-link {
+                display: inline-block;
+                margin-bottom: 20px;
+                color: #007bff;
+                text-decoration: none;
+                font-weight: bold;
+            }
+            .back-link:hover {
+                text-decoration: underline;
+            }
+            .profile-container {
+                background-color: #f9f9f9;
+                padding: 20px;
+                border-radius: 8px;
+                border: 1px solid #ddd;
+            }
+            .profile-detail {
+                margin: 15px 0;
+                padding: 10px;
+                background-color: white;
+                border-left: 4px solid #007bff;
+                padding-left: 15px;
+            }
+            .profile-detail strong {
+                color: #333;
+            }
+            .error-message {
+                color: #d32f2f;
+                padding: 15px;
+                background-color: #ffebee;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <a href="index.html" class="back-link">← Back to Breeds</a>
+        <div id="profile-container" class="profile-container">
+            <div id="loading">Loading...</div>
+        </div>
+
+        <script>
+            // Get the breed id from URL parameters
+            function getBreedIdFromURL() {
+                const params = new URLSearchParams(window.location.search);
+                return params.get('id');
+            }
+
+            function displayBreedProfile(breed) {
+                const container = document.getElementById('profile-container');
+                container.innerHTML = '';
+                
+                // Create title
+                const title = document.createElement('h1');
+                title.textContent = breed.attributes.name;
+                container.appendChild(title);
+
+                // Display breed details
+                const details = breed.attributes;
+
+                if (details.description) {
+                    const descDetail = document.createElement('div');
+                    descDetail.className = 'profile-detail';
+                    descDetail.innerHTML = `<strong>Description:</strong> ${details.description}`;
+                    container.appendChild(descDetail);
+                }
+
+                if (details.male_weight) {
+                    const maleWeightDetail = document.createElement('div');
+                    maleWeightDetail.className = 'profile-detail';
+                    const min = details.male_weight.min || 'N/A';
+                    const max = details.male_weight.max || 'N/A';
+                    maleWeightDetail.innerHTML = `<strong>Male Weight:</strong> ${min} - ${max} kg`;
+                    container.appendChild(maleWeightDetail);
+                }
+
+                if (details.female_weight) {
+                    const femaleWeightDetail = document.createElement('div');
+                    femaleWeightDetail.className = 'profile-detail';
+                    const min = details.female_weight.min || 'N/A';
+                    const max = details.female_weight.max || 'N/A';
+                    femaleWeightDetail.innerHTML = `<strong>Female Weight:</strong> ${min} - ${max} kg`;
+                    container.appendChild(femaleWeightDetail);
+                }
+
+                if (details.life_span) {
+                    const lifeSpanDetail = document.createElement('div');
+                    lifeSpanDetail.className = 'profile-detail';
+                    lifeSpanDetail.innerHTML = `<strong>Life Span:</strong> ${details.life_span}`;
+                    container.appendChild(lifeSpanDetail);
+                }
+
+                if (details.temperament) {
+                    const temperamentDetail = document.createElement('div');
+                    temperamentDetail.className = 'profile-detail';
+                    temperamentDetail.innerHTML = `<strong>Temperament:</strong> ${details.temperament}`;
+                    container.appendChild(temperamentDetail);
+                }
+            }
+
+            function displayError(message) {
+                const container = document.getElementById('profile-container');
+                container.innerHTML = `<div class="error-message">${message}</div>`;
+            }
+
+            function loadBreedProfile() {
+                const breedId = getBreedIdFromURL();
+                
+                if (!breedId) {
+                    displayError('No breed ID provided. Please select a breed from the list.');
+                    return;
+                }
+
+                fetch('https://dogapi.dog/api/v2/breeds')
+                    .then(response => response.json())
+                    .then(function(data) {
+                        const breeds = data.data;
+                        
+                        // Find the breed with matching ID
+                        const breed = breeds.find(b => b.id === breedId);
+                        
+                        if (breed) {
+                            displayBreedProfile(breed);
+                        } else {
+                            displayError(`Breed with ID ${breedId} not found.`);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching breeds:', error);
+                        displayError('Error loading breed data. Please try again.');
+                    });
+            }
+
+            // Load profile when page loads
+            loadBreedProfile();
+        </script>
+    </body>
+</html>
