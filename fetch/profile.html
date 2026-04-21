@@ -53,7 +53,7 @@
         </div>
 
         <script>
-            // Get the breed id from URL parameters
+            
             function getBreedIdFromURL() {
                 const params = new URLSearchParams(window.location.search);
                 return params.get('id');
@@ -63,12 +63,12 @@
                 const container = document.getElementById('profile-container');
                 container.innerHTML = '';
                 
-                // Create title
+                
                 const title = document.createElement('h1');
                 title.textContent = breed.attributes.name;
                 container.appendChild(title);
 
-                // Display breed details
+                //this ishow the details of the breed are displayed
                 const details = breed.attributes;
 
                 if (details.description) {
@@ -129,7 +129,7 @@
                     .then(function(data) {
                         const breeds = data.data;
                         
-                        // Find the breed with matching ID
+                  
                         const breed = breeds.find(b => b.id === breedId);
                         
                         if (breed) {
@@ -144,7 +144,7 @@
                     });
             }
 
-            // Load profile when page loads
+         
             loadBreedProfile();
         </script>
     </body>
