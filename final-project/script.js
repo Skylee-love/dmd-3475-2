@@ -16,7 +16,31 @@ const wardrobe = [
 
 let currentOutfit = [];
 
+const savedOutfit = localStorage.getItem("currentOutfit");
+
+if (savedOutfit) {
+  currentOutfit = JSON.parse(savedOutfit);
+}
+
 const wardrobeGrid = document.getElementById("wardrobeGrid");
+const searchInput = document.getElementById("searchInput");
+const outfitArea = document.getElementById("outfitArea");
+
+const clearOutfitBtn = document.getElementById("clearOutfitBtn");
+clearOutfitBtn.addEventListener("click", () => {
+  currentOutfit = [];
+  localStorage.setItem("currentOutfit", JSON.stringify(currentOutfit));
+  renderOutfit();
+});
+
+const sortNameBtn = document.getElementById("sortNameBtn");
+sortNameBtn.addEventListener("click", () => {
+  wardrobe.sort((a, b) => {
+    return a.name.localeCompare(b.name);
+  });
+
+  renderWardrobe();
+});
 
 // STEP 1: make a function that displays items
 function renderWardrobe() {
@@ -42,12 +66,10 @@ function renderWardrobe() {
   });
 }
 
-// run it once
-renderWardrobe();
 
 //search function
 
-//debug section -
+//debug section - ignore
 
 //const searchInput = document.getElementById("searchInput");
 
@@ -114,6 +136,7 @@ function renderFilteredItems(items) {
         <img src="${item.image}" alt="${item.name}"/>
         <p>${item.name}</p>
         <div>${tagsHTML}</div>
+        <button onclick="addToOutfit('${item.name}')">Add to Outfit</button>
       </div>
     `;
   });
@@ -122,9 +145,43 @@ function renderFilteredItems(items) {
 function addToOutfit(itemName) {
   const selectedItem = wardrobe.find(item => item.name === itemName);
 
+  const alreadyInOutfit = currentOutfit.some(item => item.name === itemName);
+
+  if (alreadyInOutfit) {
+    alert("This item is already in your outfit!");
+    return;
+  }
+
     currentOutfit.push(selectedItem);
 
-    console.log("Added to outfit:", currentOutfit);
+    localStorage.setItem("currentOutfit", JSON.stringify(currentOutfit));
+
+    renderOutfit();
   
 }
 
+
+
+function renderOutfit() {
+  outfitArea.innerHTML = "";
+
+  currentOutfit.forEach((item, index) => {
+    outfitArea.innerHTML += `
+      <div class="outfit-item">
+        <img src="${item.image}" alt="${item.name}" />
+        <p>${item.name}</p>
+        <button onclick="removeFromOutfit(${index})">Remove</button>
+      </div>
+    `;
+  });
+}
+function removeFromOutfit(index) {
+  currentOutfit.splice(index, 1);
+
+  localStorage.setItem("currentOutfit", JSON.stringify(currentOutfit));
+
+  renderOutfit();
+}
+
+renderWardrobe();
+renderOutfit();
