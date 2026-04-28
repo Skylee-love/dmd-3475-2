@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fashion Central</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- 🌟 HEADER -->
+  <header class="header">
+    <h1 class="logo">Fashion Central</h1>
+    <p class="subtitle">Your Digital Wardrobe Studio.</p>
+  </header>
+
+
+  <!-- 🔍 SEARCH + FILTER -->
+  <section class="top-controls">
+
+    <div class="search-bar">
+      <label for="searchInput">Search:</label>
+      <input id="searchInput" type="text" />
+    </div>
+
+    <div class="filters">
+      <span>Filter</span>
+      <button data-filter="all">all</button>
+      <button data-filter="tops">tops</button>
+      <button data-filter="bottoms">bottoms</button>
+      <button data-filter="shoes">shoes</button>
+    </div>
+
+  </section>
+
+
+  <!-- 🧺 MAIN LAYOUT -->
+  <div class="app-container">
+
+    <!-- 👚 LEFT: WARDROBE GRID -->
+    <main id="wardrobeGrid" class="wardrobe-grid">
+      
+      <!-- Example card (JS will generate more) -->
+      <div class="card">
+        <div class="card-image"></div>
+        <p class="card-name">Item Name</p>
+        <p class="card-tags">#tag1 #tag2</p>
+      </div>
+
+    </main>
+
+
+    <!-- 🧩 RIGHT: OUTFIT BUILDER -->
+    <aside class="sidebar">
+
+      <h2>Outfit Builder</h2>
+      <p>Drop items here</p>
+
+      <!-- Selected items appear here -->
+      <div id="outfitArea" class="outfit-area">
+
+        <div class="outfit-item">
+          <div class="outfit-image"></div>
+          <p>Item name</p>
+        </div>
+
+        <div class="outfit-item">
+          <div class="outfit-image"></div>
+          <p>Item name</p>
+        </div>
+
+      </div>
+
+      <!-- Outfit name -->
+      <div class="outfit-name">
+        <label>Outfit name:</label>
+        <input id="outfitName" type="text" />
+      </div>
+
+      <!-- Buttons -->
+      <button id="saveOutfitBtn">Save Outfit</button>
+      <button id="clearOutfitBtn">Clear</button>
+
+    </aside>
+
+  </div>
+
+
+  <!-- ➕ ADD ITEM MODAL -->
+  <div id="modal" class="modal hidden">
+
+    <div class="modal-content">
+      <h2>Add New Item</h2>
+
+      <input id="itemName" placeholder="Name" />
+      
+      <select id="itemCategory">
+        <option value="tops">Tops</option>
+        <option value="bottoms">Bottoms</option>
+        <option value="shoes">Shoes</option>
+        <option value="outerwear">Outerwear</option>
+        <option value="accessories">Accessories</option>
+      </select>
+
+      <input id="itemColor" placeholder="Color" />
+      <input id="itemImage" placeholder="Image URL" />
+      <input id="itemTags" placeholder="Tags (comma separated)" />
+
+      <button id="saveItemBtn">Save Item</button>
+      <button id="closeModalBtn">Close</button>
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
