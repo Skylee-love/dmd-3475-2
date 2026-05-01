@@ -5,18 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fashion Central</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ingrid+Darling&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playwrite+NZ+Guides&family=Princess+Sofia&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <!-- 🌟 HEADER -->
+  <!--  HEADER -->
   <header class="header">
     <h1 class="logo">Fashion Central</h1>
     <p class="subtitle">Your Digital Wardrobe Studio.</p>
   </header>
 
 
-  <!-- 🔍 SEARCH + FILTER -->
+  <!--  SEARCH + FILTER -->
   <section class="top-controls">
 
     <div class="search-bar">
@@ -24,7 +27,9 @@
       <input id="searchInput" type="text" />
     </div>
 
+  <div class="sortNameBtn-section">
  <button id="sortNameBtn">Sort A-Z</button>
+</div>
 
     <div class="filters">
       <span>Filter</span>
@@ -36,32 +41,22 @@
 
   </section>
 
+  
 
-  <!-- 🧺 MAIN LAYOUT -->
+  <!--  MAIN LAYOUT -->
   <div class="app-container">
 
-    <!-- 👚 LEFT: WARDROBE GRID -->
+    <!--  LEFT: WARDROBE GRID -->
     <main id="wardrobeGrid" class="wardrobe-grid">
-      
-      <!-- Example card (JS will generate more) -->
-      <div class="card">
-        <div class="card-image"></div>
-        <p class="card-name">Item Name</p>
-        <p class="card-tags">#tag1 #tag2</p>
-      </div>
-
     </main>
-
-
-    <!-- 🧩 RIGHT: OUTFIT BUILDER -->
+    <!--  RIGHT: OUTFIT BUILDER -->
     <aside class="sidebar">
 
       <h2>Outfit Builder</h2>
       <p>Drop items here</p>
 
-      <!-- Selected items appear here -->
+      <!-- selected stuff appears here -->
       <div id="outfitArea" class="outfit-area">
-
         <div class="outfit-item">
           <div class="outfit-image"></div>
           <p>Item name</p>
@@ -71,26 +66,37 @@
           <div class="outfit-image"></div>
           <p>Item name</p>
         </div>
+        
 
       </div>
 
-      <!-- Outfit name -->
+      <!-- outfit name -->
       <div class="outfit-name">
         <label>Outfit name:</label>
         <input id="outfitName" type="text" />
       </div>
 
-      <!-- Buttons -->
+      <!-- buttons -->
       <button id="saveOutfitBtn">Save Outfit</button>
       <button id="clearOutfitBtn">Clear</button>
 
+      <section class="saved-outfits-section">
+    <h3>Saved Outfits</h3>
+    <div id="savedOutfitsGrid" class="saved-outfits-grid"></div>
+  </section>
+
     </aside>
 
+   <section class="inspo-section">
+  <h2>Inspo Board</h2>
+  <button id="loadInspoBtn">Load Inspiration</button>
+  <div id="inspoGrid" class="inspo-grid"></div>
+</section>
+    
   </div>
 
 
-  <!-- ➕ ADD ITEM MODAL -->
-  <div id="modal" class="modal hidden">
+    <div id="modal" class="modal hidden">
 
     <div class="modal-content">
       <h2>Add New Item</h2>
