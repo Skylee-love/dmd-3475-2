@@ -67,34 +67,6 @@ function renderWardrobe() {
 }
 
 
-//search function
-
-//debug section - ignore
-
-//const searchInput = document.getElementById("searchInput");
-
-//searchInput.addEventListener("input", () => {
-//  console.log("filter starting");
-
-//  const filteredItems = wardrobe.filter(item => {
-//    console.log("checking item:", item.name);
-//    return true;
-//  });
-
-//  renderFilteredItems(filteredItems);
-//});
-
-//const filteredItems = wardrobe.filter(item => {
-//  console.log("inside filter");
-
-//  const tagMatches = item.tags.some(tag => {
-//    console.log("checking tag:", tag);
-//    return true;
-//  });
-
-//  return tagMatches;
-//});
-
 //final search function
 
 searchInput.addEventListener("input", () => {
